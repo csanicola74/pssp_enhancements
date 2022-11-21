@@ -234,10 +234,10 @@ class Procedures_Patient(db.Model):
         }
 
 
-#### BASIC ROUTES WITHOUT DATA PULSL FOR NOW ####
+#### PAGE ROUTING ####
 @app.route('/')
 def index():
-    return render_template('landing.html')
+    return render_template('login.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
