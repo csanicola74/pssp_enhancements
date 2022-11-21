@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+    Patient Portal
+{% endblock %}
+
+
+
+{% block body %}
+
+    <!-- insert bootstrap nav bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Patient Portal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="{{ url_for('get_gui_patients') }}">Patient</a>
+                    <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <a class="nav-link" href="">Messaging</a>
+                    <a class="nav-link" href="">Settings</a>
+                    <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <br />
+
+
+    <!-- <div class="jumbotron p-3">
+        <div class="well text-center">
+            <h1>Patient Self Service Portal (PssP - Admin v.02) </h1>
+        </div>
+    </div> -->
+
+{% endblock %}

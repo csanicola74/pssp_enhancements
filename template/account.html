@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+{% block title %} Home {% endblock %}
+{% block body %}
+
+<div>
+    <div class="container">
+        <div class="row justify-content-center algin-items-center">
+            <br />
+            <p>Your account details are below:</p>
+            <table class="table table-striped">
+                <tr>
+                    <td>Username:</td>
+                    <td>{{ account.username }}</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>{{ account.email }}</td>
+                </tr>
+                <tr>
+                    <td>Account type:</td>
+                    <td>{{ account.account_type }}</td>
+                </tr>
+                <tr>
+                    <td>Account ID:</td>
+                    <td>{{ account.id }}</td>
+                </tr>
+                <tr>
+                    <td>Account MRN:</td>
+                    <td>{{ account.mrn }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

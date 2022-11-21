@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Signin Template · Bootstrap v5.2</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}"> 
+<!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <!-- <link href="signin.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='signin.css') }}"> 
+
+  </head>
+  <body class="text-center">
+    
+<main class="form-signin w-100 m-auto">
+
+  <form action="{{ url_for('register_patient') }}" method="post">
+
+
+    <h1 class="h3 mb-3 fw-normal">Patient Account</h1>
+
+    <!-- first name -->
+    <div class="form-floating" style="padding: .2em">
+        <input type="text" class="form-control" id="first_name" name="first_name" required>
+        <label for="floatingInput">First Name</label>
+    </div>
+
+    <!-- last name -->
+    <div class="form-floating" style="padding: .2em">
+        <input type="text" class="form-control" id="last_name" name="last_name" required>
+        <label for="floatingInput">Last Name</label>
+    </div>
+
+    <!-- zip code -->
+    <div class="form-floating" style="padding: .2em">
+        <input type="text" class="form-control" id="zip_code" name="zip_code" required>
+        <label for="floatingInput">Zip Code</label>
+    </div>
+
+    <!-- bootstrap calendar selector for date of birth -->
+    <div class="form-floating" style="padding: .2em">
+        <input type="date" class="form-control" id="dob" name="dob" required>
+        <label for="floatingInput">Date of Birth</label>
+    </div>
+
+    <!-- create single select for sex -->
+    <div class="form-floating">
+        <select class="form-select" id="gender" name="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <label for="floatingSelect">User Type</label>
+    </div>
+
+
+    <!-- create a drop down of conditions that is multi-select for the patient to choose between -->
+    <!-- this brings in the conditions object and loops through -->
+    <label for="floatingSelect" style="margin-bottom: 0; margin-top: 1em">Conditions</label>
+    <div class="form-floating" style="padding-top: 1em; padding-bottom:1em">
+        <select class="form-select" 
+        id="conditions" name="conditions" multiple aria-label="multiple select example" style="font-size: large; width: auto; height: auto;" >
+          {% for condition in conditions %}
+            <option value="{{ condition.icd10_code }}">{{ condition.icd10_description }}</option>
+          {% endfor %}
+        </select>
+    </div>
+
+
+
+
+
+    <!-- mobile phone  -->
+    <div class="form-floating" style="padding: .2em">
+        <input type="text" class="form-control" id="contact_mobile" name="contact_mobile" required>
+        <label for="floatingInput">Phone Number (mobile) </label>
+    </div>
+
+    <!-- home phone -->
+    <div class="form-floating" style="padding: .2em">
+        <input type="text" class="form-control" id="contact_home" name="contact_home" required>
+        <label for="floatingInput">Phone Number (mobile) </label>
+    </div> 
+
+    <!-- email -->
+    <div class="form-floating" style="padding: .2em">
+      <input type="email" class="form-control" id="email" name="email" required>
+      <label for="floatingInput">Email</label>
+    </div>
+
+    <!-- username -->
+    <div class="form-floating" style="padding: .2em">
+        <input type="text" class="form-control" id="username" name="username" required>
+      <label for="floatingInput">Username</label>
+    </div>
+
+    <!-- password -->
+    <div class="form-floating" style="padding: .2em">
+        <input type="password" class="form-control" id="password" name="password" required>
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="msg">{{ msg }}</div>
+
+    <br />
+    
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit" value="Register">Create Patient Account</button>
+
+    </div>
+
+
+  </form>
+
+
+
+
+</main>
+  </body>
+</html>

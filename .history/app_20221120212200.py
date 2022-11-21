@@ -236,7 +236,7 @@ class Procedures_Patient(db.Model):
 #### PAGE ROUTING ####
 @app.route('/')
 def index():
-    return render_template('login.html')
+    return render_template('landing.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
