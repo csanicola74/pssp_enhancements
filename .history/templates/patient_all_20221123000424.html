@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+{% block title %} Home {% endblock %}
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <div class="jumbotron p-3">
+
+                <h2 style="margin-bottom: 1em;"> Patient List
+                    <button type="button" class="btn btn-success float-right"
+                        data-toggle="modal" data-target="#addpatient">Add New Patient
+                    </button> 
+                </h2>
+
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissable" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+
+                {{message}}
+
+                </div>
+
+
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+
+                <table class="table table-hover table-dark">
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>MRN</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Zip Code</th>
+                        <th>Gender</th>
+                        <th>Setting</th>
+
+                    </tr>
+
+
+                   {% for row in patients %}
+                    <tr>
+                        <td>{{row.id}}</td>
+                        <td>{{row.mrn}}</td>
+                        <td>{{row.first_name}}</td>
+                        <td>{{row.last_name}}</td>
+                        <td>{{row.zip_code}} </td>
+                        <td>{{row.gender}}</td>
+                        <td>
+                            <a href="/update/{{row.mrn}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.mrn}}">Edit</a>
+                            <a href="/delete/{{row.mrn}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+                            <a href="/details/{{row.mrn}}" class="btn btn-info btn-xs">Details</a>
+                        </td>
+
+                    </tr>
+
+
+                  <!-- Modal Edit Employee-->
+
+
+                  
+                    <div id="modaledit{{row.mrn}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Update Information</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{url_for('update')}}" method="POST">
+                                <div class="form-group">
+                                    <label for="mrn">MRN</label>
+                                    <input type="text" class="form-control" name="mrn" value="{{row.mrn}}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>First name:</label>
+                                    <input type="text" class="form-control" name="first_name" value="{{row.first_name}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last name:</label>
+                                    <input type="text" class="form-control" name="last_name" value="{{row.last_name}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Gender:</label>
+                                    <input type="text" class="form-control" name="gender" value="{{row.gender}}">
+                                </div> 
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Update</button>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+                    {% endfor %}
+
+
+                </table>
+
+
+            </div>
+
+
+
+                  <!-- Modal Add Patient-->
+
+
+        <div id="addpatient" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Patient</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <form action="{{url_for('insert')}}" method="POST">
+                            <div class="form-group">
+                                <label>Medical Record Number:</label>
+                                <input type="text" class="form-control" name="mrn" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label>First Name:</label>
+                                <input type="text" class="form-control" name="first_name" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name:</label>
+                                <input type="text" class="form-control" name="last_name" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Zip Code </label>
+                                <input type="text" class="form-control" name="zip_code" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label> Gender </label>
+                                <input type="text" class="form-control" name="gender" required="1">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Add Patient</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
