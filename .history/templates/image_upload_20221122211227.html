@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+{% block title %} Home {% endblock %}
+{% block body %}
+
+<!-- create a view with four containers, the first container is for demographics,
+the second container is for vitals, the third container is for allergies, and the fourth container is for medications -->
+
+<!-- create a bootstrap side navigation bar that is horizontal -->
+
+
+<!-- create a new container with two columns -->
+<div class="container">
+
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <!-- File Upload-->
+        <div class="form-group">
+            <label for="inputFile">Please select your user image:</label>
+            <input class="form-control-file" type="file" name="inputFile">
+        </div>
+
+        <!-- Submit -->        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+
+</div>
+    
+
+
+
+
+
+
+
+
+{% endblock %}
+
+                    

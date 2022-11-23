@@ -1,0 +1,118 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Starter Template · Bootstrap v5.2</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/starter-template/">
+
+    
+
+    
+<!-- THIS IS THE PART BELOW THAT CAME WITH IT, WE NEED TO UPDATE THE LOCATION -->
+<!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- THIS HERE NOW IS THE CORRECT LOCATION BELOW.... -->
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}"> 
+
+
+    
+    <!-- Custom styles for this template -->
+    <!-- IMPORTANT we can then override some of the default settings, and load in a 2nd CSS file -->
+    <!-- <link href="starter-template.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}"> 
+
+  </head>
+  <body>
+    <div>
+        <div class="container">
+            <div class="row justify-content-center algin-items-center">
+                <br />
+    
+    
+                
+    
+    
+                <p>Your account details are below:</p>
+                <table class="table table-striped">
+                    <tr>
+                        <td>User Profile Image:</td>
+                        <td> 
+                            <img src="data:image/jpeg;base64, {{ user_image.photo_data }}" alt="img_data"  id="imgslot"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Username:</td>
+                        <td>{{ account.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>{{ account.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Account type:</td>
+                        <td>{{ account.account_type }}</td>
+                    </tr>
+                    <tr>
+                        <td>Account ID:</td>
+                        <td>{{ account.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Account MRN:</td>
+                        <td>{{ account.mrn }}</td>
+                    </tr>
+                    <tr>
+                        <td>Settings:</td>
+                        
+                    </tr>
+                </table>
+
+
+                
+                  <!-- Modal Edit Account-->
+                  
+                  <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Update Information</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{url_for('user_update')}}" method="POST">
+                                <div class="form-group">
+                                    <label for="id">ID</label>
+                                    <input type="text" class="form-control" name="id" value="{{row.id}}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Username:</label>
+                                    <input type="text" class="form-control" name="username" value="{{row.username}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="text" class="form-control" name="email" value="{{row.email}}">
+                                </div>
+                                </div> 
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Update</button>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    
+    </div>
+
+</main>
+</body>
+</html>
+

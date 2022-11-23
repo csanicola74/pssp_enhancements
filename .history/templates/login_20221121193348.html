@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Daily UI | #001 - Sign Up</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='signin.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}"> 
+<!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    
+    <!-- Custom styles for this template -->
+    <!-- <link href="signin.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='signin.css') }}"> 
+
+  </head>
+  <body class="text-center">
+    
+<main class="form-signin w-100 m-auto">
+
+  <form action="{{ url_for('login') }}" method="post">
+    <h1 class="h3 mb-3 fw-normal">Login</h1>
+
+    <div class="form-floating" style="padding: .2em">
+      <input type="text" class="form-control" id="username" name="username">
+      <label for="floatingInput">Username</label>
+    </div>
+
+    <div class="form-floating" style="padding: .2em">
+      <input type="password" class="form-control" id="password" name="password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="msg">{{ msg }}</div>
+
+    <br />
+    
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit" value="Login">Login</button>
+      <a href="{{ url_for('register') }}" class="btn btn-primary">Register</a>
+
+    </div>
+
+
+  </form>
+
+
+</main>
+  </body>
+</html>

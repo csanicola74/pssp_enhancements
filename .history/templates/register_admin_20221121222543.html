@@ -1,0 +1,40 @@
+
+
+  <form action="{{ url_for('register_admin') }}" method="post">
+    <h1 class="h3 mb-3 fw-normal">Admin Account</h1>
+
+
+    <div class="form-floating" style="padding: .2em">
+      <input type="email" class="form-control" id="email" name="email" required>
+      <label for="floatingInput">Email</label>
+    </div>
+
+    <div class="form-floating" style="padding: .2em">
+      <input type="text" class="form-control" id="username" name="username" required>
+      <label for="floatingInput">Username</label>
+    </div>
+
+    <div class="form-floating" style="padding: .2em">
+      <input type="password" class="form-control" id="password" name="password" required>
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="msg">{{ msg }}</div>
+
+    <br />
+    
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit" value="Register">Create Admin Account</button>
+      <!-- <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a> -->
+
+    </div>
+
+
+  </form>
+
+
+
+
+</main>
+  </body>
+</html>

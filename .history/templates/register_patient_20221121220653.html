@@ -1,0 +1,129 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>Sanicola Health - Register - Patient</title>
+  <link rel="stylesheet" href="/static/register.css">
+  </head>
+  <body class="text-center">
+
+    
+  <meta charset="UTF-8">
+  <title>Sanicola Health - Register - Patient</title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+
+  <div class="grid align__item">
+
+    <div class="register">
+      <div style="position: relative; width: 100%; height: 0; padding-top: 100.0000%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+ border-radius: 8px; will-change: transform;">
+  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAFSoIes0Ak/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+  </iframe>
+</div>
+
+  <form action="{{ url_for('register_patient') }}" method="post">
+
+
+    <h1>Patient Account</h1>
+
+    <!-- first name -->
+    <div class="form__field" style="padding: .2em">
+        <input type="text" id="first_name" name="first_name" required>
+        <label for="floatingInput">First Name</label>
+    </div>
+
+    <!-- last name -->
+    <div class="form__field" style="padding: .2em">
+        <input type="text" id="last_name" name="last_name" required>
+        <label for="floatingInput">Last Name</label>
+    </div>
+
+    <!-- zip code -->
+    <div class="form__field" style="padding: .2em">
+        <input type="text" id="zip_code" name="zip_code" required>
+        <label for="floatingInput">Zip Code</label>
+    </div>
+
+    <!-- bootstrap calendar selector for date of birth -->
+    <div class="form__field" style="padding: .2em">
+        <input type="date" class="form-control" id="dob" name="dob" required>
+        <label for="floatingInput">Date of Birth</label>
+    </div>
+
+    <!-- create single select for sex -->
+    <div class="form__field">
+        <select class="form-select" id="gender" name="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <label for="floatingSelect">User Type</label>
+    </div>
+
+
+    <!-- create a drop down of conditions that is multi-select for the patient to choose between -->
+    <!-- this brings in the conditions object and loops through -->
+    <label for="floatingSelect" style="margin-bottom: 0; margin-top: 1em">Conditions</label>
+    <div class="form__field" style="padding-top: 1em; padding-bottom:1em">
+        <select class="form-select" 
+        id="conditions" name="conditions" multiple aria-label="multiple select example" style="font-size: large; width: auto; height: auto;" >
+          {% for condition in conditions %}
+            <option value="{{ condition.icd10_code }}">{{ condition.icd10_description }}</option>
+          {% endfor %}
+        </select>
+    </div>
+
+
+
+
+
+    <!-- mobile phone  -->
+    <div class="form__field" style="padding: .2em">
+        <input type="text" class="form-control" id="contact_mobile" name="contact_mobile" required>
+        <label for="floatingInput">Phone Number (mobile) </label>
+    </div>
+
+    <!-- home phone -->
+    <div class="form__field" style="padding: .2em">
+        <input type="text" class="form-control" id="contact_home" name="contact_home" required>
+        <label for="floatingInput">Phone Number (mobile) </label>
+    </div> 
+
+    <!-- email -->
+    <div class="form__field" style="padding: .2em">
+      <input type="email" class="form-control" id="email" name="email" required>
+      <label for="floatingInput">Email</label>
+    </div>
+
+    <!-- username -->
+    <div class="form__field" style="padding: .2em">
+        <input type="text" class="form-control" id="username" name="username" required>
+      <label for="floatingInput">Username</label>
+    </div>
+
+    <!-- password -->
+    <div class="form__field" style="padding: .2em">
+        <input type="password" class="form-control" id="password" name="password" required>
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="msg">{{ msg }}</div>
+
+    <br />
+    
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit" value="Register">Create Patient Account</button>
+
+    </div>
+
+
+  </form>
+
+
+
+
+</main>
+  </body>
+</html>

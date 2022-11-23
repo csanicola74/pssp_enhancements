@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+{% block title %} Home {% endblock %}
+{% block body %}
+
+<div>
+    
+    <h1> Future dashboard page will go here .....</h1>
+    
+    <body style="font-family:arial, sans-serif">
+        <div id="chart" class="chart"></div>
+    </body>
+
+    
+    <!-- just need to load this script in once -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- for each datapoint/graph, need to assign a ID  -->
+    <script type="text/javascript">
+        var graphs = {{graphJSON | safe}};
+        Plotly.plot('chart', graphs, {});        
+    </script>
+
+
+</div>
+
+{% endblock %}

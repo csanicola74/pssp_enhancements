@@ -1,0 +1,326 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+{% block title %} Home {% endblock %}
+{% block body %}
+
+<!-- create a view with four containers, the first container is for demographics,
+the second container is for vitals, the third container is for allergies, and the fourth container is for medications -->
+
+<!-- create a bootstrap side navigation bar that is horizontal -->
+
+
+<!-- create a new container with two columns -->
+<div class="container">
+    <div class="row">
+
+
+        <div class="col-sm-3">
+            <div class="container">
+                <div class="row">
+                        <div class="list-group"
+                            style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em; margin-right: 1em;">
+                                <a href="/add_condition" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#addcondition">Add New Condition</a>
+                                <a href="/add_medication" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#addmedication" >Add New Medication</a>
+                                <a href="#" class="list-group-item list-group-item-action">Add New Procedure</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+
+        
+        <div class="col-sm-9">  
+            
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col md-12">
+                        <div class="jumbotron p-3">
+                            <h2> Patient Details </h2>
+                            <hr>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col md-6">
+                                        <h3> Demographics </h3>
+                                        <hr>
+                                        <table class="table table-hover table-dark">
+                                            <tr>
+                                                <th>ID</th>
+                                                <td>{{patient_details.id}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>MRN</th>
+                                                <td>{{patient_details.mrn}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>First Name</th>
+                                                <td>{{patient_details.first_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Last Name</th>
+                                                <td>{{patient_details.last_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th> Zip Code</th>
+                                                <td>{{patient_details.zip_code}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th> Gender </th>
+                                                <td> {{patient_details.gender}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    
+                                    <div class="col md-6">
+                                        <h3> Conditions </h3>
+                                        <hr>
+                                        <table class="table table-hover table-dark">
+            
+                                            {% for row in patient_conditions %}
+            
+                                            <tr>
+            
+                                                <td> 
+                                                    {{row.icd10_code}} 
+                                                    <br/>
+                                                    {% for db_condition in db_conditions %}
+                                                        {% if row.icd10_code == db_condition.icd10_code %}
+                                                                {{db_condition.icd10_description}}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    <br />
+                                                    <a href="/update_conditions/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaleditcondition{{row.id}}">Edit</a>
+                                                    <a href="/delete_condition/" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaldeletecondition{{row.id}}">Delete</a>
+                                                </td>
+                                            </tr>
+            
+            
+                                            <!-- NEW MODEL WINDOW FOR ADDING CONDITION -->
+                                            <div id="addcondition" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Add New Condition</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{url_for('add_condition')}}" method="POST">
+                                                                <div class="form-group">
+                                                                    <label for="mrn">MRN</label>
+                                                                        <input type="text" class="form-control" name="mrn" id="mrn" value="{{patient_details.mrn}}" readonly>
+                                                                    <label for="icd10_code">ICD10 Code</label>
+                                                                    <select class="form-control" name="icd10_code" id="icd10_code">
+                                                                        {% for row in db_conditions %}
+                                                                            <option value="{{row.icd10_code}}" >{{row.icd10_description}} : {{row.icd10_code}} </option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                    <button class="btn btn-primary" type="submit" style="margin-top: 1em">Insert</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+            
+            
+                                            <!-- NEW MODEL FOR DELETING CONDITION -->
+                                            <div id="modaldeletecondition{{row.id}}" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Delete Condition</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{url_for('delete_condition')}}" method="POST">
+                                                                <div class="form-group">
+                                                                    <label for="mrn">MRN</label>
+                                                                        <input type="text" class="form-control" name="mrn" value="{{patient_details.mrn}}" readonly>
+                                                                    <label for="icd10_code">ICD10 Code To Delete</label>
+                                                                        <input type="text" class="form-control" name="icd10_code" value="{{row.icd10_code}}" readonly>
+                                                                    <button class="btn btn-primary" type="submit" style="margin-top: 1em">Delete</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+            
+            
+            
+                                            <!-- MODEL WINDOW FOR EDITING -->
+            
+                                            <div id="modaleditcondition{{row.id}}" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Update Information</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{url_for('update_conditions')}}" method="POST">
+            
+                                                            <div class="form-group">
+                                                                <label for="mrn">MRN</label>
+                                                                <input type="text" class="form-control" name="mrn" value="{{row.mrn}}" readonly>
+                                                            </div>
+            
+                                                            <div class="form-group">
+                                                                <label for="mrn">ROW ID</label>
+                                                                <input type="text" class="form-control" name="id" value="{{row.id}}" readonly>
+                                                            </div>
+            
+                                                            <div class="form-group">
+                                                                <label for="mrn">EXISTING CONDITION</label>
+                                                                <input type="text" class="form-control" name="id" value="{{row.icd10_code}}" readonly>
+                                                            </div>
+            
+                                                            <!-- create a drop down that shows db_conditions -->
+                                                            <div class="form-group">
+                                                                <label for="icd10_code">Condition Code</label>
+                                                                <select class="form-control" name="icd10_code">
+                                                                    {% for row in db_conditions %}
+                                                                    <!-- default option value is none -->
+                                                                        <option value="{{row.icd10_code}}" >{{row.icd10_code}} : {{row.icd10_description}}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+            
+                                                            <div class="form-group">
+                                                                <button class="btn btn-primary" type="submit">Update</button>
+                                                            </div>
+            
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+            
+            
+                                                {% endfor %}
+            
+            
+                                        </table>
+                                    </div>
+            
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+            
+                                    <div class="col md-6">
+                                        <h3> Medications </h3>
+                                        <hr>
+                                        <table class="table table-hover table-dark">
+                                      
+
+                                            {% for row in patient_medications %}
+            
+                                            <tr>
+            
+                                                <td> 
+                                                    {{row.med_ndc}} 
+                                                    <br/>
+                                                    {% for med in db_medications %}
+                                                        {% if row.med_ndc == med.med_ndc %}
+                                                                {{med.med_human_name}}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    <br />
+                                                </td>
+                                            </tr>
+
+
+
+                                            <!-- NEW MODEL WINDOW FOR ADDING CONDITION -->
+                                            <div id="addmedication" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Add New Medication</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{url_for('add_medication')}}" method="POST">
+                                                                <div class="form-group">
+                                                                    <label for="mrn">MRN</label>
+                                                                        <input type="text" class="form-control" name="mrn" id="mrn" value="{{patient_details.mrn}}" readonly>
+                                                                    <label for="med_ndc">Med NDC Code</label>
+                                                                    <select class="form-control" name="med_ndc" id="med_ndc">
+                                                                        {% for row in db_medications %}
+                                                                            <option value="{{row.med_ndc}}" >{{row.med_human_name}} : {{row.med_ndc}} </option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                    <button class="btn btn-primary" type="submit" style="margin-top: 1em">Insert</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+                                            {% endfor %}
+
+
+                                
+                                
+            
+                                        </table>
+                                    </div>
+
+            
+                                    <div class="col md-6">
+                                        <h3> Procedures </h3>
+                                        <hr>
+                                        <table class="table table-hover table-dark">
+                                            <tr>
+                                                <th>Procedure Name</th>
+                                                <td>not yet developed</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+            
+                                </div>
+                            </div>
+                        </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+                    

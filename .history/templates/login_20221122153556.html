@@ -1,0 +1,73 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>Sanicola Health - Login</title>
+  <link rel="stylesheet" href="/static/signin.css">
+  </head>
+  <body class="text-center">
+
+
+
+
+    
+  <meta charset="UTF-8">
+  <title>Sanicola Health - Login</title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+
+
+  <div class="grid align__item">
+
+    <div class="register">
+      <div style="position: relative; width: 100%; height: 0; padding-top: 100.0000%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+ border-radius: 8px; will-change: transform;">
+      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAFSoIes0Ak/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+      </iframe>
+    </div>
+
+  
+      <form action="{{ url_for('login') }}" method="post">
+      
+      <h2>Login</h2>
+
+      
+        
+        <div class="form__field">
+          <input type="email" placeholder="info@mailaddress.com">
+        </div>
+
+        <div class="form__field">
+          <input type="password" placeholder="••••••••••••">
+        </div>
+
+        <div class="msg">{{ msg }}</div>
+
+        <br />
+
+        <div class="form__field">
+          <input type="submit" value="Login">
+        </div>
+
+      </form>
+
+      <p>Don't have an account? <a href="/register">Register</a></p>
+
+    <br>
+
+    </div>
+
+
+    <hr class="col-3 col-md-2 mb-5">
+
+  </main>
+  <footer class="pt-5 my-5 text-muted border-top">
+    Created by Caroline Sanicola  &middot; &copy; 2022
+  </footer>
+</div>
+
+
+
+  
+</div></body></html>

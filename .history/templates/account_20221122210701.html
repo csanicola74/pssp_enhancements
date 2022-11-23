@@ -1,0 +1,72 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Starter Template · Bootstrap v5.2</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/starter-template/">
+
+    
+
+    
+<!-- THIS IS THE PART BELOW THAT CAME WITH IT, WE NEED TO UPDATE THE LOCATION -->
+<!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- THIS HERE NOW IS THE CORRECT LOCATION BELOW.... -->
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}"> 
+
+
+    
+    <!-- Custom styles for this template -->
+    <!-- IMPORTANT we can then override some of the default settings, and load in a 2nd CSS file -->
+    <!-- <link href="starter-template.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}"> 
+
+  </head>
+  <body>
+
+<div>
+    <div class="container">
+        <div class="row justify-content-center algin-items-center">
+            <br />
+            <p>Your account details are below:</p>
+
+
+            <img src="data:image/jpeg;base64,{{user_image.photo_data_rendered}}">       
+            
+
+            <table class="table table-striped">
+                <tr>
+                    <td>Username:</td>
+                    <td>{{ account.username }}</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>{{ account.email }}</td>
+                </tr>
+                <tr>
+                    <td>Account type:</td>
+                    <td>{{ account.account_type }}</td>
+                </tr>
+                <tr>
+                    <td>Account ID:</td>
+                    <td>{{ account.id }}</td>
+                </tr>
+                <tr>
+                    <td>Account MRN:</td>
+                    <td>{{ account.mrn }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</main>
+</body>
+</html>
+
